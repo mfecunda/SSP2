@@ -301,7 +301,6 @@ public class Coursework1Main {
 
         shelf = makeAddTwoItemSameAndNullSmartshelf();
         testObjectEqual("toString", "[" + ITEM8 + ", " + ITEM8 + "]", shelf.toString());
-
         shelf = makeAddTwoItemAndNullSmartshelf();
         testObjectEqual("greatestItem", ITEM1, shelf.greatestItem());
         shelf = makeAddTwoItemAndNullSmartshelf();
@@ -335,6 +334,7 @@ public class Coursework1Main {
         testIntEqual("totalWeightInGrammes", 55, shelf.totalWeightInGrammes());
         shelf = makeAddAllTwoItemAndNullSmartshelf();
         testDoubleEqual("averageWeightInGrammes", 27.5, shelf.averageWeightInGrammes());
+
 
         shelf = makeConstructorTwoItemAndNullSmartshelf();
         testObjectEqual("greatestItem", ITEM1, shelf.greatestItem());
@@ -382,6 +382,7 @@ public class Coursework1Main {
         testIntEqual("totalWeightInGrammes", 0, shelf.totalWeightInGrammes());
         shelf = makeResetSmartshelf();
         testDoubleEqual("averageWeightInGrammes", -1.0, shelf.averageWeightInGrammes());
+
 
         shelf = makeKeepSmartshelf();
         testIntEqual("greatestItem", 400, shelf.greatestItem().getWeightInGrammes());

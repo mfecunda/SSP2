@@ -14,19 +14,11 @@ import java.util.Arrays;
  */
 public class Smartshelf {
     private static ArrayList<Item> allItems;
-    private static int itemCount;
-
-    // TO DO
-
-    /* Constructors */
-
     /**
      * Constructs a new Smartshelf without any Items.
      */
     public Smartshelf() {
-        allItems = new ArrayList<Item>();
-        itemCount = 0;
-
+        allItems = new ArrayList<>();
     }
 
 
@@ -40,8 +32,18 @@ public class Smartshelf {
      *  constructed Smartshelf
      */
     public Smartshelf(Item[] items) {
-        allItems = new ArrayList<Item>();
-        itemCount = 0;
+
+        if(items.length > 1){
+            allItems = new ArrayList<>();
+            for (int i = 0; i < items.length; i++) {
+                if (items[i] != null) {
+                    allItems.add(items[i]);
+                }
+            }
+
+
+        }
+
 
 
 
@@ -58,9 +60,9 @@ public class Smartshelf {
      */
     public boolean add(Item e) {
 
+        
         if (e != null ){
             allItems.add(e);
-            itemCount++;
             return true;
         }
         else {
@@ -77,15 +79,23 @@ public class Smartshelf {
      *  false otherwise
      */
     public boolean addAll(Item[] items) {
-        // TO DO
+
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
+                allItems.add(items[i]);
+            }
+        }
+        if (allItems.size() > 0) {
+            return true;
+        }
+
         return false;
     }
-
     /**
      * Empties this Smartshelf to a Smartshelf that contains 0 Items.
      */
     public void empty() {
-        // TO DO
+        allItems = new ArrayList<>();
     }
 
     /**
@@ -97,7 +107,13 @@ public class Smartshelf {
      *  Items that are kept
      */
     public void keepOnlyItemsWith(int maxItemWeightInGrammes) {
-        // TO DO
+        ArrayList <Item>onlyNewItems = new ArrayList<>();
+        for (int i = 0; i < allItems.size(); i++) {
+            if (allItems.get(i).getWeightInGrammes()<= maxItemWeightInGrammes){
+                onlyNewItems.add(allItems.get(i));
+            }
+        }
+        allItems = onlyNewItems;
     }
 
     /* Accessors */
@@ -108,8 +124,7 @@ public class Smartshelf {
      * @return the number of non-null Items in this Smartshelf
      */
     public int numberOfItems() {
-
-        return itemCount;
+        return allItems.size();
     }
 
     /**
@@ -118,8 +133,11 @@ public class Smartshelf {
      * @return the total weight of the Items in this Smartshelf.
      */
     public int totalWeightInGrammes() {
-        // TO DO
-        return 0;
+        int averageWeight = 0;
+        for (int i = 0; i <allItems.size() ; i++) {
+            averageWeight += allItems.get(i).getWeightInGrammes();
+        }
+        return averageWeight;
     }
 
     /**
@@ -137,8 +155,12 @@ public class Smartshelf {
      *  or -1.0 if there is no such Item.
      */
     public double averageWeightInGrammes() {
-        // TO DO
-        return 0.0;
+        if(allItems.size() == 0){
+            return -1;
+        }
+        int numberOfItems = allItems.size();
+        double totalWeight = totalWeightInGrammes();
+            return totalWeight/numberOfItems;
     }
 
     /**
@@ -151,8 +173,18 @@ public class Smartshelf {
      *  null if this Smartshelf does not contain any Item objects
      */
     public Item greatestItem() {
+        Item largestItem = null;
+        if(allItems.size() > 0) {
+            largestItem = allItems.get(0);
+            int weight = allItems.get(0).getWeightInGrammes();
+            for (int i = 0; i < allItems.size(); i++) {
+                if (allItems.get(i).getWeightInGrammes() > weight) {
+                    largestItem = allItems.get(i);
+                }
+            }
+        }
         // TO DO
-        return null;
+        return largestItem;
     }
 
     /**
@@ -166,7 +198,15 @@ public class Smartshelf {
      *  whose weight is less than or equal to the specified method parameter
      */
     public Smartshelf makeNewSmartshelfWith(int maxItemWeightInGrammes) {
+        ArrayList<Item >oldItems = allItems;
         Smartshelf newItems = new Smartshelf();
+
+        for (int i = 0; i < oldItems.size(); i++) {
+            if( maxItemWeightInGrammes >= oldItems.get(i).getWeightInGrammes()){
+                newItems.add(oldItems.get(i));
+            }
+
+        }
 
 
         return newItems;
@@ -226,7 +266,19 @@ public class Smartshelf {
      *  reference in Smartshelfs
      */
     public static Smartshelf heaviestSmartshelf(Smartshelf[] Smartshelfs) {
-        // TO DO
+
+             for (Smartshelf shelf : Smartshelfs) {
+
+                     System.out.println(shelf.toString());
+
+
+             }
+
+
+
+
+
+
         return null;
     }
 }
